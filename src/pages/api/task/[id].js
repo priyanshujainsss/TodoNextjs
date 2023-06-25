@@ -20,6 +20,7 @@ const handler=async(req,res)=>{
  
     }
     task.isCompleted=!task.isCompleted
+    task.updatedAt=new Date()
     console.log("==========task============",task)
 
     await task.save();

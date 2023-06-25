@@ -9,21 +9,30 @@ const AddTodoForm = () => {
   const router=useRouter()
   const [title,setTitle]=useState("")
 const [description,setDescription]=useState("")
+const [date,setDate]=useState("")
+
 const handleAddTodo=async(e)=>{
   e.preventDefault()
   const resp=await fetch("/api/newTask", {
     method:"POST",
-    body:JSON.stringify({title,description}),
+    body:JSON.stringify({title,description,date}),
     headers:{
       "Content-Type":"application/json"
     }
   })
   const res=await resp.json();
-  toast.success(res.message)
-  router.refresh()
-  setTitle("")
-  setDescription("")
-  console.log("==============res===============",res)
+  if(res.status){
+
+    toast.success(res.message)
+    router.refresh()
+    setTitle("")
+    setDescription("")
+    setDate("")
+  }
+  else{
+    toast.error(res.message)
+
+  }
 
 }
 
@@ -34,6 +43,8 @@ if(!user?._id) return redirect("/login")
             <form onSubmit={handleAddTodo}>
                 <input type="text" placeholder='Task Title' value={title} onChange={(e)=>setTitle(e.target.value)} />
                 <input type="text" placeholder='Task Description' value={description} onChange={(e)=>setDescription(e.target.value)}  />
+                <input type="datetime-local" placeholder='Choose date' value={date} onChange={(e)=>setDate(e.target.value)}  />
+
                 <button type='submit' >Add Task</button>
               
             </form>

@@ -22,16 +22,14 @@ export const Todos = async() => {
     const token=cookies().get("token")?.value;
     if(!token) redirect("/login")
   const todosList=await fetchTodo(token)
-  console.log("todolist", todosList)
+
   return (
     <div> <AddTodoForm />
     <section className='todosContainer' >
-      
-
-      {
+            {
           todosList?.map(todo=>(
               
-              <TodoItem title={todo.title} description={todo.description} id={todo._id} completed={todo.isCompleted} key={todo._id}  />
+              <TodoItem title={todo.title} description={todo.description} date={todo.date} id={todo._id} completed={todo.isCompleted} key={todo._id} updateAt={todo.updatedAt} />
               ))
             }
         
