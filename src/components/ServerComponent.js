@@ -8,7 +8,7 @@ export const TodoItem = ({title,description,id, completed,date,updateAt}) => {
             <h4>{title}</h4>
             <p>{description}</p>
             <p>Created At:  {new Date(date).toLocaleDateString()} {new Date(date).toLocaleTimeString()}</p>
-            <p>Updated At:{new Date(date).toLocaleDateString()} {new Date(date).toLocaleTimeString()} </p>
+            <p>Updated At:{new Date(updateAt).toLocaleDateString()} {new Date(updateAt).toLocaleTimeString()} </p>
         </div>
         <TodoBtn id={id} completed={completed} />
     </div>
